@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>P1:</p>
+    <p>P2:</p>
+    <p>P3:</p>
+    <p>P4:</p>
+    <input type="text" id="inputT" placeholder="Escribe un color">
+    <button id="botonC" onclick="cambiarColor()">Escribe-color Modificar</button>
+    <script>
+        const input = document.getElementById('inputT');
+        const parrafos = document.querySelectorAll('p');
+        const boton = document.getElementById("botonC");
+        const cambiarColor = () => {
+            for(let i=0; i<parrafos.length; i++){
+                parrafos[i].style.color = input.value;
+                parrafos[i].textContent = `"Párrafo" b ${i}`;
+            }
+        }
+    </script>
+</body>
+</html>

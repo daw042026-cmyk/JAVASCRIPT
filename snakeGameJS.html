@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<body style="background: #222; text-align: center;">
+
+    <canvas id="canvas" width="400" height="400" style="background: #111; margin-top: 50px;"></canvas>
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const SIZE = 20, TR = canvas.width / SIZE;
+
+    // 1. Estructura básica de la Lista Enlazada
+    class Node {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.next = null;
+        }
+    }
+
+    class LinkedList {
+        constructor() { this.head = null; }
+        
+        insertHead(x, y) {
+            const node = new Node(x, y);
+            node.next = this.head;
+            this.head = node;
+        }
+
+        removeTail() {
+            if (!this.head || !this.head.next) return this.head = null;
+            let c = this.head;
+            while (c.next.next) c = c.next;
+            c.next = null;
+        }
+    }
+
+    // 2. Estado inicial del juego
+    const snake = new LinkedList();
+    snake.insertHead(10, 11); // Cuerpo
+    snake.insertHead(10, 10); // Cabeza
+
+    let dx = 0, dy = -1; // Dirección inicial (arriba)
+    let foodX = 5, foodY = 5;
+
+    // 3. Bucle del juego
+    setInterval(() => {
+        // Mover cabeza
+        const newX = snake.head.x + dx;
+        const newY = snake.head.y + dy;
+
+        // Colisión con bordes o con sí misma (recorriendo la lista)
+        if (newX < 0 || newX >= TR || newY < 0 || newY >= TR) return location.reload();
+        let c = snake.head;
+        while (c) {
+            if (c.x === newX && c.y === newY) return location.reload();
+            c = c.next;
+        }
+
+        // Aplicar movimiento en la lista
+        snake.insertHead(newX, newY);
+        
+        if (newX === foodX && newY === foodY) { // Comer comida
+            foodX = Math.floor(Math.random() * TR);
+            foodY = Math.floor(Math.random() * TR);
+        } else {
+            snake.removeTail(); // Mantener tamaño si no come
+        }
+
+        // 4. Dibujar
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar pantalla
+
+        ctx.fillStyle = "red"; // Dibujar comida
+        ctx.fillRect(foodX * SIZE, foodY * SIZE, SIZE - 2, SIZE - 2);
+
+        c = snake.head; // Dibujar serpiente recorriendo los nodos uno a uno
+        ctx.fillStyle = "green";
+        while (c) {
+            ctx.fillRect(c.x * SIZE, c.y * SIZE, SIZE - 2, SIZE - 2);
+            c = c.next;
+        }
+    }, 150);
+
+    // 5. Control de teclado sencillo
+    window.onkeydown = e => {
+        if (e.key === "ArrowUp"    && dy === 0) { dx = 0; dy = -1; }
+        if (e.key === "ArrowDown"  && dy === 0) { dx = 0; dy = 1; }
+        if (e.key === "ArrowLeft"  && dx === 0) { dx = -1; dy = 0; }
+        if (e.key === "ArrowRight" && dx === 0) { dx = 1; dy = 0; }
+    };
+</script>
+</body>
+</html>

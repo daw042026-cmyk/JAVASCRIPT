@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function message(){
+            let price = 300
+            let quantity = 3
+            message1 = "data"
+            alert("Price "+price+" Quantity "+quantity+" message "+message1)
+        }
+        function Message(){
+            alert("Mayuscula")
+        }
+
+        //podemos llamar a message 1 fuera de la función, ya que la hemos definido como una variable global, no le hemos puesto ni var ni let
+        message()
+        //esta instrucción está fuera de la definición de funciones
+        console.log(message1)
+    </script>
+    <h2>La diferencia</h2><br>
+    <span>Lowercase: </span><input type="button" onclick="message()" value="Dale para ver"><br>
+    <span>Uppercase: </span><input type="button" onclick="Message()" value="Dale para ver">
+</body>
+</html>

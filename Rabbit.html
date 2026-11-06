@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="comenzar-boton">Comenzar horizontal</button>
+    <button id="cambiar-direccion">Comenzar vertical</button>
+    <button id="acelerar-boton">Acelerar!</button>
+    <button id="parar-boton">Parar</button>
+    <div id="info"></div>
+
+    <img id="rabbit" style="position:absolute; left: 0px; top: 80px;" src="rabbit-skip (1).gif">
+
+    <script>
+        const startBoton = document.getElementById("comenzar-boton");
+        const speedBoton = document.getElementById("acelerar-boton");
+        const pararBoton = document.getElementById("parar-boton");
+        const cambiarDireccion = document.getElementById("cambiar-direccion");
+
+        let movePx = 10;
+        let timer = null;
+        let timerVertical = null;
+
+        const rabbitWalk = () => {
+            const rabbit = document.getElementById("rabbit");
+            let currentLeft = parseInt(rabbit.style.left);
+            rabbit.style.left = currentLeft + movePx + "px";
+
+            if (currentLeft > window.innerWidth - rabbit.width) {
+                rabbit.style.left = '0px';
+            }
+        }
+
+        const rabbitWalkVertical = () => {
+            const rabbit = document.getElementById("rabbit");
+            let currentTop = parseInt(rabbit.style.top);
+            rabbit.style.top = currentTop + movePx + "px";
+            if (currentTop > window.innerHeight - rabbit.height) {
+                rabbit.style.top = '0px';
+            }
+        }
+
+        const onStopClick = () => {
+            window.clearInterval(timer);
+            window.clearInterval(timerVertical);
+            movePx = 0;
+            pararBoton.setAttribute("disabled", "disabled");
+            speedBoton.setAttribute("disabled", "disabled");
+            cambiarDireccion.removeAttribute("disabled");
+            startBoton.removeAttribute("disabled");
+        }
+
+        const onStartClick = () => {
+            movePx = 10;
+            timer = window.setInterval(rabbitWalk, 50);
+            startBoton.setAttribute("disabled", "disabled");
+            cambiarDireccion.setAttribute("disabled", "disabled");
+            pararBoton.removeAttribute("disabled");
+            speedBoton.removeAttribute("disabled");
+        }
+
+        const onVerticalClick = () => {
+            movePx = 10;
+            timerVertical = window.setInterval(rabbitWalkVertical, 50);
+            startBoton.setAttribute("disabled", "disabled");
+            cambiarDireccion.setAttribute("disabled", "disabled");
+            pararBoton.removeAttribute("disabled");
+            speedBoton.removeAttribute("disabled");
+        }
+
+        const onSpeedClick = () => {
+            movePx += 5;
+        }
+
+        startBoton.addEventListener("click", onStartClick);
+        cambiarDireccion.addEventListener("click", onVerticalClick);
+        speedBoton.addEventListener("click", onSpeedClick);
+        pararBoton.addEventListener("click", onStopClick);
+
+        startBoton.removeAttribute("disabled");
+        cambiarDireccion.removeAttribute("disabled");
+        pararBoton.setAttribute("disabled", "disabled");
+        speedBoton.setAttribute("disabled", "disabled");
+    </script>
+</body>
+
+</html>

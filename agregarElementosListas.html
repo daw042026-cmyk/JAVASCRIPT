@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var total = 0;
+    const agregarLi = () => {
+        total++;
+        document.getElementsByTagName('ul')[0].innerHTML+='<li>Elemento'+total+'</li>';
+    }
+
+    const copiarLista = () => {
+        var lista = document.getElementsByTagName('ul')[0];
+        lista.insertAdjacentElement('afterend', lista.outerHTML);
+    }
+</script>
+<body>
+    <button id="agregarLista" onclick="agregarLi()">Agregar Elemento </button>
+    <button id="copiarBtn">Copiar Lista</button>
+    <ul id="listaElementos" onclick="copiarLista()"></ul>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let edad = prompt("Introduzca su edad: ")
+        const grupoEdad = (numero) => {
+            if (numero<13){
+                alert("Niño/a")
+            } else if (numero>=13 && numero<=19) {
+                alert("Adolescente")
+            } else if (numero>=20 && numero<=64) {
+                alert("Adulto")
+            } else {
+                alert("Adulto/a mayor")
+            }
+        }
+        grupoEdad(edad)
+    </script>
+</body>
+</html>

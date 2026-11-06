@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function msHastaCumpleanos(dia, mes, hora, minuto, segundo, ahora = new Date()) {
+  const cumple = new Date(ahora.getTime());
+  cumple.setMonth(mes - 1, dia);
+  cumple.setHours(hora, minuto, segundo, 0);
+
+  if (cumple.getTime() <= ahora.getTime()) {
+    cumple.setFullYear(cumple.getFullYear() + 1);
+  }
+
+  return cumple.getTime() - ahora.getTime();
+}
+
+const dia = parseInt(prompt("Día de tu cumpleaños (1-31):"), 10);
+const mes = parseInt(prompt("Mes de tu cumpleaños (1-12):"), 10);
+const hora = parseInt(prompt("Hora de nacimiento (0-23), o 0 si no la sabes:"), 10) || 0;
+
+if (isNaN(dia) || isNaN(mes) || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
+  console.log("Fecha no válida.");
+} else {
+  const ms = msHastaCumpleanos(dia, mes, hora, 0, 0);
+  console.log(`Milisegundos hasta tu próximo cumpleaños: ${ms}`);
+}
+    </script>
+</body>
+</html>

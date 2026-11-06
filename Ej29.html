@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nombres = [];
+        let contador = 1;
+
+        const añadirNombres = () => {
+        while(contador<=3){
+            let into_users = prompt(`Introduce el nombre ${valor}`);
+            nombres.push(into_users);
+        }
+    }
+
+    añadirNombres();
+    nombres.forEach(function(posicion, nombre){
+        document.write(posicion+" - "+nombre+"<br>");
+    })
+    </script>
+</body>
+</html>

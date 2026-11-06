@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimiento murciélago</title>
+</head>
+<body>
+    <img style="position: absolute; transition: all 2s ease;" width="150" height="150" src="murci.jpg" alt="murciélago"><br><br><br><br><br><br><br><br><br>
+    <button id="botonRandom" onclick="moverMurcielago(); setInterval(moverMurcielago, 1000)">random</button>
+    <button id="botonH" onclick="moverMurcielagoH()">Horizontal</button>
+    <button id="botonV">Vertical</button>
+    <script>
+        const murcielago = document.querySelector('img');
+        murcielago.style.left = 0 + "px";
+        murcielago.style.top = 0 + "px";
+
+        function moverMurcielago () {
+            const x = Math.round(Math.random() * window.innerWidth - murcielago.width);
+            const y = Math.round(Math.random() * window.innerHeight - murcielago.height);
+
+            murcielago.style.left = x + "px";
+            murcielago.style.top = y + "px";
+        }
+
+        function moverMurcielagoH(){
+            const maxw = window.innerWidth - murcielago.width;
+            murcielago.style.left = maxw + "px";
+            
+
+        }
+
+    </script>
+</body>
+</html>

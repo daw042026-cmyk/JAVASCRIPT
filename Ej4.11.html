@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>Texto</span>
+    <input type="text" id="txtCaja">
+    <input type="button" onclick="insertar();" value="Insertar texto nuevo"><br><br>
+    <input type="text" id="textRCaja"><br><br>
+    Inserta una posición: <input type="text" id="filaNumber">
+    <input type="button" onclick="reemplazar();" value="Reemplazar"><br><br>
+    <table id="tabla" style="border: 1px dashed green;"></table>
+    <script>
+        function insertar(){
+            var codigoFila="<td>"+document.getElementById('txtCaja').value+"</td>";
+            codigoFila+="<td><input type='button' onclick='copiarEncima(this);' value='Copiar encima'/></td>";
+            codigoFila+="<td><input type='button' onclick='borrar(this);' value='Borrar'/></td>";
+            var fila = document.createElement('tr');
+            fila.innerHTML=codigoFila;
+            document.getElementById('tabla').appendChild(fila);
+        }
+
+        function copiarEncima(boton){
+            var fila = boton.parentNode.parentNode;
+            document.getElementById('tabla').insertBefore(fila.cloneNode(true), fila);
+        }
+        function borrar(boton){
+            var fila = boton.parentNode.parentNode;
+            document.getElementById('tabla').removeChild(fila);
+        }
+        function reemplazar(){
+            var texto = document.getElementById('textRCaja').value; 
+            var posicion = document.getElementById('filaNumber').value;
+            var filas = document.getElementById('tabla').getElementsByTagName('tr');
+            if(posicion < filas.length){
+                var celda = filas[posicion-1].getElementsByTagName('td')[0];
+                celda.innerHTML = texto;
+            } else {
+                alert('No existe la fila '+posicion);
+            }
+        }
+
+    </script>
+</body>
+</html>

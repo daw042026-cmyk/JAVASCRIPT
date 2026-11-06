@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    function validarCorreo(correo){
+        patron=/^[a-z0-9_]+@{1}[a-z]+\.[a-z]{2,4}$/;
+        exprReg= new RegExp(patron);
+        if (correo.match(exprReg)) {
+            console.log("Correo valido");
+        }else{
+            console.log("Correo con formato incorrecto");
+        }
+    }
+    validarCorreo("micorreo@gmail.com");
+    validarCorreo("micorreo-gmail.com");
+    validarCorreo("micorreo@yahoo.es");
+    validarCorreo("micorreo231231@gmail.es");
+</script>
